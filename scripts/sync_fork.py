@@ -235,7 +235,6 @@ def branch_touches_workflows(bare_repo: Path, ref: str) -> bool:
         )
         return bool(out.strip())
 
-
 def push_refspec(
     bare_repo: Path,
     refspec: str,
@@ -267,12 +266,19 @@ def push_refspec(
         return
 
     if refspec == "refs/tags/*:refs/tags/*":
+        print(f"[info] Push groupé de {refspec} vers {fork_url}...")
+        try:
+            run_git(["push", auth_fork_url, refspec, "--force"], cwd=bare_repo, token=token)
+            return
+        except RuntimeError as batch_exc:
+            print(f"[warn] Push groupé des tags échoué, fallback tag par tag : {batch_exc}")
+
         tags = run_git(
             ["for-each-ref", "--format=%(refname:short)", "refs/tags"],
             cwd=bare_repo,
             capture=True,
         ).splitlines()
-        print(f"[info] Push de {len(tags)} tags vers {fork_url}...")
+        print(f"[info] Tentative sur {len(tags)} tags individuellement...")
         for tag in tags:
             try:
                 run_git(
@@ -280,13 +286,12 @@ def push_refspec(
                     cwd=bare_repo,
                     token=token,
                 )
-            except RuntimeError as exc:
-                print(f"[warn] Tag '{tag}' rejeté par le serveur distant, ignoré : {exc}")
+            except RuntimeError as tag_exc:
+                print(f"[warn] Tag '{tag}' rejeté par le serveur distant, ignoré : {tag_exc}")
         return
 
     print(f"[info] Push {refspec} vers {fork_url}...")
     run_git(["push", auth_fork_url, refspec, "--force"], cwd=bare_repo, token=token)
-
 
 def sync_entry(
     config_path: Path,
