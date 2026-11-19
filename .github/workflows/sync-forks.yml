@@ -2,7 +2,7 @@ name: Sync All Forks
 
 on:
   schedule:
-    - cron: "0 4 * * 1" # Tous les lundis à 04:00 UTC
+    - cron: "0 4 * * 1"
   workflow_dispatch: {}
 
 jobs:
@@ -14,15 +14,19 @@ jobs:
       - name: Checkout central config
         uses: actions/checkout@v4
 
+      - name: Install PyYAML
+        run: pip install pyyaml
+
       - name: Build matrix from forks.yml
         id: build-matrix
         run: |
           python3 -c '
-          import json, yaml
-          with open("forks.yml") as f:
+          import json, os, yaml
+          with open("forks.yml", "r", encoding="utf-8") as f:
               data = yaml.safe_load(f)
-          print("matrix=" + json.dumps({"include": data["forks"]}), file=open(os.environ["GITHUB_OUTPUT"], "a"))
-          '
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write("matrix=" + json.dumps({"include": data["forks"]}) + "\n")
+          '    '
 
   sync:
     needs: prepare
