@@ -115,3 +115,6 @@ forks:
 
   - name: libwebp
     upstream: https://chromium.googlesource.com/webm/libwebp.git
+
+  - name: lifxlan
+    upstream: https://github.com/mclarkk/lifxlan.git
