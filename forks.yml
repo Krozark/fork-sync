@@ -23,95 +23,95 @@ forks:
   - name: python3 # hostpython3
     upstream: https://github.com/python/cpython.git
 
-      #  - name: ifaddrs
-      #    upstream: https://github.com/morristech/android-ifaddrs.git
-      #
-      #  - name: jpeg
-      #    upstream: https://github.com/libjpeg-turbo/libjpeg-turbo.git
-      #
-      #  - name: json
-      #    upstream: https://github.com/nlohmann/json.git
-      #
-      #  - name: kaldi-decoder
-      #    upstream: https://github.com/k2-fsa/kaldi-decoder.git
-      #
-      #  - name: kaldifst
-      #    upstream: https://github.com/k2-fsa/kaldifst.git
-      #
-      #  - name: kaldi-native-fbank
-      #    upstream: https://github.com/csukuangfj/kaldi-native-fbank.git
-      #
-      #  - name: kissfft
-      #    upstream: https://github.com/mborgerding/kissfft.git
-      #
-      #  - name: kivy
-      #    upstream: https://github.com/kivy/kivy.git
-      #
-      #  - name: kivymd
-      #    upstream: https://github.com/kivymd/KivyMD.git
-      #
-      #  - name: libcairo
-      #    upstream: https://gitlab.freedesktop.org/cairo/cairo.git
-      #
-      #  - name: libffi
-      #    upstream: https://github.com/libffi/libffi.git
-      #
-      #  - name: liblzma
-      #    upstream: https://github.com/tukaani-project/xz.git
-      #
-      #  - name: libthorvg
-      #    upstream: https://github.com/thorvg/thorvg.git
-      #
-      #  - name: materialyoucolor
-      #    upstream: https://github.com/T-Dynamos/materialyoucolor-python.git
-      #
-      #  - name: numpy
-      #    upstream: https://github.com/numpy/numpy.git
-      #
-      #  - name: openfst
-      #    upstream: https://github.com/csukuangfj/openfst.git
-      #
-      #  - name: piper-phonemize
-      #    upstream: https://github.com/csukuangfj/piper-phonemize.git
-      #
-      #  - name: png
-      #    upstream: https://github.com/glennrp/libpng.git
-      #
-      #  - name: pycairo
-      #    upstream: https://github.com/pygobject/pycairo.git
-      #
-      #  - name: pyjnius
-      #    upstream: https://github.com/kivy/pyjnius.git
-      #
-      #  - name: sdl2
-      #    upstream: https://github.com/libsdl-org/SDL.git
-      #
-      #  - name: sdl2_image
-      #    upstream: https://github.com/libsdl-org/SDL_image.git
-      #
-      #  - name: sdl2_mixer
-      #    upstream: https://github.com/libsdl-org/SDL_mixer.git
-      #
-      #  - name: sdl2_ttf
-      #    upstream: https://github.com/libsdl-org/SDL_ttf.git
-      #
-      #  - name: sherpa-onnx
-      #    upstream: https://github.com/k2-fsa/sherpa-onnx.git
-      #
-      #  - name: simple-sentencepiece
-      #    upstream: https://github.com/pkufool/simple-sentencepiece.git
-      #
-      #  - name: sqlite3
-      #    upstream: https://github.com/sqlite/sqlite.git
-      #
-      #  - name: vosk
-      #    upstream: https://github.com/alphacep/vosk-api.git
-      #
-      #  - name: freetype
-      #    upstream: gitlab.freedesktop.org/freetype/freetype.git
-      #
-      #  - name: openssl
-      #    upstream: https://github.com/openssl/openssl.git
-      #
-      #  - name: libwebp
-      #    upstream: https://chromium.googlesource.com/webm/libwebp.git
+  - name: ifaddrs
+    upstream: https://github.com/morristech/android-ifaddrs.git
+
+  - name: jpeg
+    upstream: https://github.com/libjpeg-turbo/libjpeg-turbo.git
+
+  - name: json
+    upstream: https://github.com/nlohmann/json.git
+
+  - name: kaldi-decoder
+    upstream: https://github.com/k2-fsa/kaldi-decoder.git
+
+  - name: kaldifst
+    upstream: https://github.com/k2-fsa/kaldifst.git
+
+  - name: kaldi-native-fbank
+    upstream: https://github.com/csukuangfj/kaldi-native-fbank.git
+
+  - name: kissfft
+    upstream: https://github.com/mborgerding/kissfft.git
+
+  - name: kivy
+    upstream: https://github.com/kivy/kivy.git
+
+  - name: kivymd
+    upstream: https://github.com/kivymd/KivyMD.git
+
+  - name: libcairo
+    upstream: https://gitlab.freedesktop.org/cairo/cairo.git
+
+  - name: libffi
+    upstream: https://github.com/libffi/libffi.git
+
+  - name: liblzma
+    upstream: https://github.com/tukaani-project/xz.git
+
+  - name: libthorvg
+    upstream: https://github.com/thorvg/thorvg.git
+
+  - name: materialyoucolor
+    upstream: https://github.com/T-Dynamos/materialyoucolor-python.git
+
+  - name: numpy
+    upstream: https://github.com/numpy/numpy.git
+
+  - name: openfst
+    upstream: https://github.com/csukuangfj/openfst.git
+
+  - name: piper-phonemize
+    upstream: https://github.com/csukuangfj/piper-phonemize.git
+
+  - name: png
+    upstream: https://github.com/glennrp/libpng.git
+
+  - name: pycairo
+    upstream: https://github.com/pygobject/pycairo.git
+
+  - name: pyjnius
+    upstream: https://github.com/kivy/pyjnius.git
+
+  - name: sdl2
+    upstream: https://github.com/libsdl-org/SDL.git
+
+  - name: sdl2_image
+    upstream: https://github.com/libsdl-org/SDL_image.git
+
+  - name: sdl2_mixer
+    upstream: https://github.com/libsdl-org/SDL_mixer.git
+
+  - name: sdl2_ttf
+    upstream: https://github.com/libsdl-org/SDL_ttf.git
+
+  - name: sherpa-onnx
+    upstream: https://github.com/k2-fsa/sherpa-onnx.git
+
+  - name: simple-sentencepiece
+    upstream: https://github.com/pkufool/simple-sentencepiece.git
+
+  - name: sqlite3
+    upstream: https://github.com/sqlite/sqlite.git
+
+  - name: vosk
+    upstream: https://github.com/alphacep/vosk-api.git
+
+  - name: freetype
+    upstream: gitlab.freedesktop.org/freetype/freetype.git
+
+  - name: openssl
+    upstream: https://github.com/openssl/openssl.git
+
+  - name: libwebp
+    upstream: https://chromium.googlesource.com/webm/libwebp.git
