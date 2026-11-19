@@ -11,7 +11,7 @@ jobs:
     outputs:
       matrix: ${{ steps.build-matrix.outputs.matrix }}
     steps:
-      - name: Checkout central config
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install PyYAML
@@ -20,13 +20,18 @@ jobs:
       - name: Build matrix from forks.yml
         id: build-matrix
         run: |
-          python3 -c '
-          import json, os, yaml
+          python3 - <<'EOF'
+          import json
+          import os
+          import yaml
+
           with open("forks.yml", "r", encoding="utf-8") as f:
-              data = yaml.safe_load(f)
+              data = yaml.safe_load(f) or {}
+
+          names = [{"name": item["name"]} for item in data.get("forks", [])]
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
-              out.write("matrix=" + json.dumps({"include": data["forks"]}) + "\n")
-          '
+              out.write("matrix=" + json.dumps({"include": names}) + "\n")
+          EOF
 
   sync:
     needs: prepare
@@ -34,18 +39,16 @@ jobs:
     continue-on-error: true
     strategy:
       fail-fast: false
+      max-parallel: 4
       matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PyYAML
+        run: pip install pyyaml
+
       - name: Sync ${{ matrix.name }}
         env:
-          UPSTREAM_URL: ${{ matrix.upstream }}
-          FORK_URL: ${{ matrix.fork }}
-          REFS: ${{ join(matrix.refs, ' ') }}
-          TOKEN: ${{ secrets.FORK_PUSH_TOKEN }}
-        run: |
-          AUTH_FORK_URL="${FORK_URL/https:\/\//https:\/\/x-access-token:${TOKEN}@}"
-          git clone --bare "$UPSTREAM_URL" repo.git
-          cd repo.git
-          for refspec in $REFS; do
-            git push "$AUTH_FORK_URL" "$refspec" --force
-          done
+          FORK_PUSH_TOKEN: ${{ secrets.FORK_PUSH_TOKEN }}
+        run: python3 scripts/sync_fork.py --config forks.yml --name "${{ matrix.name }}"
