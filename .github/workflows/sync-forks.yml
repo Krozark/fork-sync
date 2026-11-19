@@ -1,0 +1,47 @@
+name: Sync All Forks
+
+on:
+  schedule:
+    - cron: "0 4 * * 1" # Tous les lundis à 04:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+    steps:
+      - name: Checkout central config
+        uses: actions/checkout@v4
+
+      - name: Build matrix from forks.yml
+        id: build-matrix
+        run: |
+          python3 -c '
+          import json, yaml
+          with open("forks.yml") as f:
+              data = yaml.safe_load(f)
+          print("matrix=" + json.dumps({"include": data["forks"]}), file=open(os.environ["GITHUB_OUTPUT"], "a"))
+          '
+
+  sync:
+    needs: prepare
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare.outputs.matrix) }}
+    steps:
+      - name: Sync ${{ matrix.name }}
+        env:
+          UPSTREAM_URL: ${{ matrix.upstream }}
+          FORK_URL: ${{ matrix.fork }}
+          REFS: ${{ join(matrix.refs, ' ') }}
+          TOKEN: ${{ secrets.FORK_PUSH_TOKEN }}
+        run: |
+          AUTH_FORK_URL="${FORK_URL/https:\/\//https:\/\/x-access-token:${TOKEN}@}"
+          git clone --bare "$UPSTREAM_URL" repo.git
+          cd repo.git
+          for refspec in $REFS; do
+            git push "$AUTH_FORK_URL" "$refspec" --force
+          done

@@ -1,0 +1,8 @@
+forks:
+  - name: onnxruntime
+    upstream: https://github.com/phprus/onnxruntime.git
+    fork: https://github.com/Krozark/onnxruntime.git
+    refs:
+      - "refs/heads/*:refs/heads/*"
+      - "refs/tags/*:refs/tags/*"
+
