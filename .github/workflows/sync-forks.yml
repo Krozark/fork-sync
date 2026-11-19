@@ -26,7 +26,7 @@ jobs:
               data = yaml.safe_load(f)
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
               out.write("matrix=" + json.dumps({"include": data["forks"]}) + "\n")
-          '    '
+          '
 
   sync:
     needs: prepare
