@@ -310,7 +310,7 @@ def sync_entry(
 
     try:
         print(f"[info] Clonage bare de {upstream_url}...")
-        run_git(["clone", "--bare", upstream_url, str(work_dir)], token=token)
+        run_git(["clone", "--mirror", upstream_url, str(work_dir)], token=token)
 
         check_submodules(
             bare_repo=work_dir,
