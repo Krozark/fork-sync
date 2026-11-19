@@ -266,6 +266,24 @@ def push_refspec(
             )
         return
 
+    if refspec == "refs/tags/*:refs/tags/*":
+        tags = run_git(
+            ["for-each-ref", "--format=%(refname:short)", "refs/tags"],
+            cwd=bare_repo,
+            capture=True,
+        ).splitlines()
+        print(f"[info] Push de {len(tags)} tags vers {fork_url}...")
+        for tag in tags:
+            try:
+                run_git(
+                    ["push", auth_fork_url, f"refs/tags/{tag}:refs/tags/{tag}", "--force"],
+                    cwd=bare_repo,
+                    token=token,
+                )
+            except RuntimeError as exc:
+                print(f"[warn] Tag '{tag}' rejeté par le serveur distant, ignoré : {exc}")
+        return
+
     print(f"[info] Push {refspec} vers {fork_url}...")
     run_git(["push", auth_fork_url, refspec, "--force"], cwd=bare_repo, token=token)
 
