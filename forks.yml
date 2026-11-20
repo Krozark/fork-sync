@@ -121,3 +121,6 @@ forks:
 
   - name: buildozer
     upstream: https://github.com/kivy/buildozer.git
+
+  - name: materialyoucolor-python
+    upstream: https://github.com/T-Dynamos/materialyoucolor-python.git
