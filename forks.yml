@@ -118,3 +118,6 @@ forks:
 
   - name: lifxlan
     upstream: https://github.com/mclarkk/lifxlan.git
+
+  - name: buildozer
+    upstream: https://github.com/kivy/buildozer.git
